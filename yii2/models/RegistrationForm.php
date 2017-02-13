@@ -2,6 +2,9 @@
    namespace app\models;
    use Yii;
    use yii\base\Model;
+   use yii\data\ActiveDataProvider;
+   use \yii\db\Query;
+   
    class RegistrationForm extends Model {
 
         public $password;
@@ -45,10 +48,7 @@
         {
             $up_data = Yii::$app->db->createCommand('SELECT * FROM Registration WHERE user_id='.$id)
            ->queryOne();
-            $up['name']=$up_data['name'];
-            $up['email']=$up_data['email'];
-            $up['password']=$up_data['password'];
-            $up['image']=$up_data['image'];
+            $up=$up_data;
             return $up;
         }
         public function updatedata($id,$name,$email,$password,$image)
@@ -60,5 +60,18 @@
         {
             Yii::$app->db->createCommand()->delete('Registration', 'user_id='.$id)->execute();
         }
+        public function gridview()
+        {
+            $query = new Query();
+            $provider = new ActiveDataProvider([
+                'query' => $query->from('Registration'),
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+                'sort'=>['attributes'=>['name']],
+            ]);
+            return $provider;
+        }
    }
+
 ?>

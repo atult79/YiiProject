@@ -3,12 +3,15 @@
    use yii\bootstrap\Html;
    use yii\helpers\Url;
    use yii\jui\DatePicker;
-    use yii\captcha\Captcha;
+   use yii\captcha\Captcha;
+   use yii\grid\GridView;
+   use yii\data\ActiveDataProvider;    
 
    if(isset($up))
    {
        $model->name=$up['name'];
        $model->email=$up['email'];
+       $model->dob=$up['dob'];
        $model->password=$up['password'];
        $model->image=$up['image'];
    }
@@ -18,12 +21,7 @@
         <?php $form = ActiveForm::begin(['id' => 'registration']); ?>
         <?= $form->field($model, 'name')->textInput() ?>
        <?= $form->field($model, 'dob')->widget(\yii\jui\DatePicker::classname(), [
-           'type' => DatePicker::TYPE_COMPONENT_APPEND,
-    'value2' => '27-Feb-1996',
-    'pluginOptions' => [
-        'autoclose'=>true,
-        'format' => 'dd-M-yyyy'
-    ]
+          
         ]) ->textInput()?>
         <?= $form->field($model, 'email')->input('email') ->textInput()?>
         <?= $form->field($model, 'password')->passwordInput() ?>
@@ -40,7 +38,7 @@
 </div>
 <div class="row">
     <table border="1">
-        <tr >
+        <tr>
             <td>Name</td>
             <td>Email</td>
             <td>Image</td>
