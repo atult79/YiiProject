@@ -29,11 +29,13 @@
                 ['verifyCode', 'captcha'],
             ];
         }
-        public function insertdata($name,$email,$password,$image)
+        public function insertdata($name,$email,$dob,$password,$image)
         {
+            echo $dob;
             Yii::$app->db->createCommand()->insert('Registration', [
                 'name' => $name,
                 'email' => $email,
+                'dob'=>$dob,
                 'password'=>$password,
                 'image'=>$image
             ])->execute();
@@ -51,9 +53,9 @@
             $up=$up_data;
             return $up;
         }
-        public function updatedata($id,$name,$email,$password,$image)
+        public function updatedata($id,$name,$email,$dob,$password,$image)
         {
-            Yii::$app->db->createCommand('UPDATE Registration SET name="'.$name.'",email="'.$email.'",password="'.$password.'",image="'.$image.'" WHERE user_id='.$id)
+            Yii::$app->db->createCommand('UPDATE Registration SET name="'.$name.'",dob="'.$dob.'",email="'.$email.'",password="'.$password.'",image="'.$image.'" WHERE user_id='.$id)
             ->execute();
         }
         public function deletedata($id)
