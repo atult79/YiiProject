@@ -13,16 +13,25 @@
        $model->email=$up['email'];
        $model->dob=$up['dob'];
        $model->password=$up['password'];
-       $model->image=$up['image'];
+       $model->image=$up['image']; 
+       $up="";
    }
-   
+   else
+   {
+        $model->name="";
+       $model->email="";
+       $model->dob="";
+       $model->password="";
+       $model->image=""; 
+   }
+   \yii\widgets\Pjax::begin(); 
 ?>
 <div class = "row">
    <div class = "col-lg-5">
         <?php $form = ActiveForm::begin(['id' => 'registration']); ?>
         <?= $form->field($model, 'name')->textInput() ?>
        <?= $form->field($model, 'dob')->widget(\yii\jui\DatePicker::classname(), [
-          
+           'dateFormat' => 'yyyy-MM-dd',
         ]) ->textInput()?>
         <?= $form->field($model, 'email')->input('email') ->textInput()?>
         <?= $form->field($model, 'password')->passwordInput() ?>
@@ -36,8 +45,9 @@
         </div>
         <?php ActiveForm::end(); ?>
    </div>
+</div>
 <?php
-\yii\widgets\Pjax::begin(); 
+
    echo GridView::widget([
       'dataProvider' => $provider,
        'summary'=>'', 

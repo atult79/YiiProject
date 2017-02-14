@@ -21,7 +21,7 @@
         <?php $form = ActiveForm::begin(['id' => 'registration']); ?>
         <?= $form->field($model, 'name')->textInput() ?>
        <?= $form->field($model, 'dob')->widget(\yii\jui\DatePicker::classname(), [
-          
+          'dateFormat' => 'yyyy-MM-dd',
         ]) ->textInput()?>
         <?= $form->field($model, 'email')->input('email') ->textInput()?>
         <?= $form->field($model, 'password')->passwordInput() ?>

@@ -32,12 +32,13 @@ class DemoController extends Controller
             $request = Yii::$app->request;
             $name=$request->post('RegistrationForm')['name'];
             $email=$request->post('RegistrationForm')['email'];
+            $dob=$request->post('RegistrationForm')['dob'];
             $password=$request->post('RegistrationForm')['password'];
             $model->image = UploadedFile::getInstance($model, 'image');
             if($model->image){
                 $model->image->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
             }
-            $model->insertdata($name,$email,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
+            $model->insertdata($name,$email,$dob,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
             return $this->render('registration', ['model' => $model,'data'=>$model->displaydata()]);
         }
         return $this->render('registration', ['model' => $model,'data'=>$model->displaydata()]);
@@ -53,7 +54,7 @@ class DemoController extends Controller
             $password=$request->post('RegistrationForm')['password'];
             $model->image = UploadedFile::getInstance($model, 'image');   
             $model->image->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
-            $model->updatedata($id,$name,$email,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
+            $model->updatedata($id,$name,$email,$dob,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
             return $this->render('registration', ['model' => $model,'data'=>$model->displaydata()]);
         }
         $up=$model->fetchid($id);   
@@ -77,12 +78,13 @@ class DemoController extends Controller
             $request = Yii::$app->request;
             $name=$request->post('RegistrationForm')['name'];
             $email=$request->post('RegistrationForm')['email'];
+            $dob=$request->post('RegistrationForm')['dob'];
             $password=$request->post('RegistrationForm')['password'];
             $model->image = UploadedFile::getInstance($model, 'image');
             if($model->image){
                 $model->image->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
             }
-            $model->insertdata($name,$email,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
+            $model->insertdata($name,$email,$dob,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
             return $this->render('sqlgrid', ['model' => $model,'provider'=>$model->gridview()]);
         }
         return $this->render('sqlgrid', ['model' => $model,'provider'=>$model->gridview()]);
@@ -98,7 +100,7 @@ class DemoController extends Controller
             $password=$request->post('RegistrationForm')['password'];
             $model->image = UploadedFile::getInstance($model, 'image');   
             $model->image->saveAs('uploads/' . $model->image->baseName . '.' . $model->image->extension);
-            $model->updatedata($id,$name,$email,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
+            $model->updatedata($id,$name,$email,$dob,$password,Url::home()."uploads/".$model->image->baseName.".".$model->image->extension);
             return $this->render('sqlgrid', ['model' => $model,'provider'=>$model->gridview()]);
         }
         $up=$model->fetchid($id);   
